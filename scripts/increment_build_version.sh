@@ -13,7 +13,7 @@ VERSION=$(echo $CURRENT_VERSION | cut -d'+' -f1)
 BUILD_NUMBER=$(echo $CURRENT_VERSION | cut -d'+' -f2)
 
 # Incrementa o build number
-NEW_BUILD_NUMBER=$((BUILD_NUMBER + 3))
+NEW_BUILD_NUMBER=$((BUILD_NUMBER + 1))
 
 # Monta a nova versão
 NEW_VERSION="$VERSION+$NEW_BUILD_NUMBER"
