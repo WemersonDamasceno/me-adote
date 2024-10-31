@@ -2,4 +2,16 @@ include: package:flutter_lints/flutter.yaml
 
 linter:
   rules:
+    prefer_const_constructors: true
+    prefer_const_literals_to_create_immutables: true
+    prefer_final_fields: true
+    prefer_is_empty: true
+    prefer_typing_uninitialized_variables: true
+    use_key_in_widget_constructors: true
+    use_rethrow_when_possible: true
+    use_super_parameters: true
+    void_checks: true
+    prefer_single_quotes: true
     prefer_relative_imports: true
+    annotate_overrides: true
+    

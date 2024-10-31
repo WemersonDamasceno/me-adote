@@ -42,7 +42,7 @@ class _PetDetailsPageState extends State<PetDetailsPage> {
                 child: SizedBox(
                     height: size.height * 0.55,
                     child: Hero(
-                      tag: "pet",
+                      tag: 'pet',
                       child: Image.network(
                         petModel.urlImage,
                         fit: BoxFit.cover,
@@ -79,7 +79,7 @@ class _PetDetailsPageState extends State<PetDetailsPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Image.asset(
-                            "assets/images/icons/ic_localizacao.png",
+                            'assets/images/icons/ic_localizacao.png',
                             width: 35,
                           ),
                           Text(
@@ -106,16 +106,16 @@ class _PetDetailsPageState extends State<PetDetailsPage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            cardDados("Idade", "${petModel.idade} Ano"),
-                            cardDados("Genero", petModel.genero),
-                            cardDados("Peso", "${petModel.peso} Kg"),
+                            cardDados('Idade', '${petModel.idade} Ano'),
+                            cardDados('Genero', petModel.genero),
+                            cardDados('Peso', '${petModel.peso} Kg'),
                           ],
                         ),
                       ),
                       ButtonWidget(
                         size: size,
                         onPressed: () {},
-                        textoButton: "Entrar em contato",
+                        textoButton: 'Entrar em contato',
                       ),
                     ],
                   ),

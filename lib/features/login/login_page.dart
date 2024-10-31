@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
           height: size.height,
           child: Stack(
             children: [
-              Image.asset("assets/images/mulher_01.png"),
+              Image.asset('assets/images/mulher_01.png'),
               Positioned(
                 top: size.height * 0.5,
                 left: 0,
@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                         const Padding(
                           padding: EdgeInsets.only(top: 15, bottom: 10),
                           child: Text(
-                            "Faça Login",
+                            'Faça Login',
                             style: TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.w900,
@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: Column(
                             children: [
                               InputWidget(
-                                labelInput: "Email",
+                                labelInput: 'Email',
                                 entradaController: emailController,
                                 entradaTipo: TextInputType.emailAddress,
                                 mostrarSenha: mostrarSenha,
@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                                 padding:
                                     const EdgeInsets.only(top: 15, bottom: 25),
                                 child: InputWidget(
-                                  labelInput: "Senha",
+                                  labelInput: 'Senha',
                                   entradaController: senhaController,
                                   entradaTipo: TextInputType.visiblePassword,
                                   mostrarSenha: mostrarSenha,
@@ -92,9 +92,9 @@ class _LoginPageState extends State<LoginPage> {
                         ButtonWidget(
                           size: size,
                           onPressed: () {
-                            Navigator.popAndPushNamed(context, "/home_page");
+                            Navigator.popAndPushNamed(context, '/home_page');
                           },
-                          textoButton: "Entrar",
+                          textoButton: 'Entrar',
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
@@ -107,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                                 color: Colors.grey,
                               ),
                               const Text(
-                                "Ou se preferir",
+                                'Ou se preferir',
                                 style: TextStyle(
                                     color: ColorConstants.cinzaTextColor),
                               ),
@@ -129,11 +129,11 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             onPressed: () {},
                             icon: Image.asset(
-                              "assets/images/icons/logo_google.png",
+                              'assets/images/icons/logo_google.png',
                               width: size.width * 0.1,
                             ),
                             label: const Text(
-                              "Entrar com o Google",
+                              'Entrar com o Google',
                               style: TextStyle(color: Color(0xFF656565)),
                             ),
                           ),

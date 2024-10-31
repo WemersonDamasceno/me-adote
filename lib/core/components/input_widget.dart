@@ -56,13 +56,13 @@ class InputWidget extends StatelessWidget {
       ),
       validator: (value) {
         if (value!.isEmpty) {
-          return "Preencha este campo!";
+          return 'Preencha este campo!';
         }
         //Se for email, verificar se possui mais de 6 caracteres!
         if (entradaTipo.toString() ==
                 TextInputType.visiblePassword.toString() &&
             value.length < 6) {
-          return "A senha deve ter no minimo 6 digitos!";
+          return 'A senha deve ter no minimo 6 digitos!';
         }
 
         //Se for email, verificar se o formato é valido!
@@ -71,7 +71,7 @@ class InputWidget extends StatelessWidget {
               r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
           RegExp regExp = RegExp(pattern);
           if (!regExp.hasMatch(value)) {
-            return "Este formato de email é inválido!";
+            return 'Este formato de email é inválido!';
           } else {
             return null;
           }

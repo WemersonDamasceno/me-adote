@@ -31,7 +31,7 @@ class CardPetsWidget extends StatelessWidget {
               Align(
                 alignment: Alignment.center,
                 child: Hero(
-                  tag: "pet",
+                  tag: 'pet',
                   child: Container(
                     height: size.height * 0.27,
                     width: size.width * 0.45,
@@ -67,7 +67,7 @@ class CardPetsWidget extends StatelessWidget {
                     color: ColorConstants.cinzaTextColor,
                   ),
                   Text(
-                    "Distancia (${itemPet.quantidadeKms}Km)",
+                    'Distancia (${itemPet.quantidadeKms}Km)',
                     style: const TextStyle(
                       fontWeight: FontWeight.w800,
                       color: ColorConstants.cinzaTextColor,

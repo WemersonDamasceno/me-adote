@@ -15,7 +15,7 @@ class SplashPage extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.only(top: kToolbarHeight + 20, bottom: 20),
             child: Text(
-              "Faça um novo amigo",
+              'Faça um novo amigo',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 23,
@@ -24,7 +24,7 @@ class SplashPage extends StatelessWidget {
             ),
           ),
           const Text(
-            "Adote um pet hoje!",
+            'Adote um pet hoje!',
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -40,9 +40,9 @@ class SplashPage extends StatelessWidget {
             child: ButtonWidget(
                 size: size,
                 onPressed: () {
-                  Navigator.popAndPushNamed(context, "/login_page");
+                  Navigator.popAndPushNamed(context, '/login_page');
                 },
-                textoButton: "Vamos lá?"),
+                textoButton: 'Vamos lá?'),
           ),
           Expanded(
             child: Container(
@@ -55,7 +55,7 @@ class SplashPage extends StatelessWidget {
                 ),
               ),
               child: Image.asset(
-                "assets/images/mulher_02.png",
+                'assets/images/mulher_02.png',
                 fit: BoxFit.cover,
               ),
             ),

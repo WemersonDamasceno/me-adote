@@ -16,18 +16,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        fontFamily: "Poppins",
+        fontFamily: 'Poppins',
         primarySwatch: Colors.yellow,
         colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: const Color(0xFFFFB228),
           secondary: const Color(0xFF1D1D1D),
         ),
       ),
-      initialRoute: "/",
+      initialRoute: '/',
       routes: {
-        "/": (context) => const SplashPage(),
-        "/login_page": (context) => const LoginPage(),
-        "/home_page": (context) => const NavHomePage(),
+        '/': (context) => const SplashPage(),
+        '/login_page': (context) => const LoginPage(),
+        '/home_page': (context) => const NavHomePage(),
       },
     );
   }
