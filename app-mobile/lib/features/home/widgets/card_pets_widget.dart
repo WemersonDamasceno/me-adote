@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants/colors_constants.dart';
-import '../../../models/pet_model.dart';
+import '../../../core/constants/colors_constants.dart';
+import '../../../core/data/models/pet_model.dart';
 
 class CardPetsWidget extends StatelessWidget {
   final PetModel itemPet;

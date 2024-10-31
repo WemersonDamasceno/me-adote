@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../components/button_widget.dart';
-import '../../components/input_widget.dart';
-import '../../constants/colors_constants.dart';
+import '../../core/components/button_widget.dart';
+import '../../core/components/input_widget.dart';
+import '../../core/constants/colors_constants.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -124,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                           width: size.width,
                           child: ElevatedButton.icon(
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.white,
+                              backgroundColor: Colors.white,
                               alignment: Alignment.centerLeft,
                             ),
                             onPressed: () {},

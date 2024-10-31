@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 
-import '../../components/button_widget.dart';
-import '../../models/pet_model.dart';
+import '../../core/components/button_widget.dart';
+import '../../core/data/models/pet_model.dart';
 
-class DetalhesPetPage extends StatefulWidget {
+class PetDetailsPage extends StatefulWidget {
   final int idPet;
   final PetModel petModel;
-  const DetalhesPetPage({
+  const PetDetailsPage({
     Key? key,
     required this.idPet,
     required this.petModel,
   }) : super(key: key);
 
   @override
-  State<DetalhesPetPage> createState() => _DetalhesPetPageState();
+  State<PetDetailsPage> createState() => _PetDetailsPageState();
 }
 
-class _DetalhesPetPageState extends State<DetalhesPetPage> {
+class _PetDetailsPageState extends State<PetDetailsPage> {
   late PetModel petModel;
 
   @override

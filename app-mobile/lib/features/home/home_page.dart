@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../models/pet_model.dart';
-import '../detalhes_pet/detalhes_pet_page.dart';
-import 'models/card_categoria_model.dart';
+import '../../core/data/models/pet_model.dart';
+import '../pet_details/pet_details_page.dart';
+import 'models/card_categoria.dart';
 import 'widgets/card_categoria_widget.dart';
 import 'widgets/card_pets_widget.dart';
 
@@ -16,15 +16,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int indexCategoriaSelecionada = 0;
   final listaCategorias = [
-    CardCategoriaModel(
+    CardCategory(
         pathImage: "assets/images/icons/ic_todos.png", titulo: "Todos"),
-    CardCategoriaModel(
-        pathImage: "assets/images/icons/ic_cao.png", titulo: "Cães"),
-    CardCategoriaModel(
-        pathImage: "assets/images/icons/ic_gato.png", titulo: "Gatos"),
-    CardCategoriaModel(
+    CardCategory(pathImage: "assets/images/icons/ic_cao.png", titulo: "Cães"),
+    CardCategory(pathImage: "assets/images/icons/ic_gato.png", titulo: "Gatos"),
+    CardCategory(
         pathImage: "assets/images/icons/ic_passaros.png", titulo: "Passáros"),
-    CardCategoriaModel(
+    CardCategory(
         pathImage: "assets/images/icons/ic_roedores.png", titulo: "Roedores"),
   ];
 
@@ -137,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                       context,
                       PageRouteBuilder(
                         transitionDuration: const Duration(seconds: 5),
-                        pageBuilder: (_, __, ___) => DetalhesPetPage(
+                        pageBuilder: (_, __, ___) => PetDetailsPage(
                           idPet: index,
                           petModel: listPets[index],
                         ),
@@ -226,10 +224,10 @@ class _HomePageState extends State<HomePage> {
           final item = listaCategorias[index];
           return Padding(
               padding: const EdgeInsets.only(right: 10),
-              child: CardCategoriaWidget(
-                indexCategoriaSelecionada: indexCategoriaSelecionada,
+              child: CardCategoryWidget(
+                categorySelected: indexCategoriaSelecionada,
                 pathImage: item.pathImage,
-                titulo: item.titulo,
+                title: item.titulo,
                 index: index,
                 onPressed: () {
                   setState(() {

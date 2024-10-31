@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'src/modules/home/nav_home_page.dart';
-import 'src/modules/login/login_page.dart';
-import 'src/modules/splash/splash_page.dart';
+import 'features/login/login_page.dart';
+import 'features/navigation/nav_home_page.dart';
+import 'features/splash/splash_page.dart';
 
 void main() {
   runApp(const MyApp());
