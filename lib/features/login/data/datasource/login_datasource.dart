@@ -2,12 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../../core/errors/exceptions.dart';
 
-abstract class RemoteDatasource {
+abstract class LoginDatasource {
   Future<String?> login(String email, String password);
   Future<String?> register(String email, String password, String name);
 }
 
-class RemoteDatasourceImpl implements RemoteDatasource {
+class LoginDatasourceImpl implements LoginDatasource {
   @override
   Future<String?> login(String email, String password) async {
     try {

@@ -1,10 +1,10 @@
 import '../../../../core/errors/exceptions.dart';
 import '../../../../core/errors/failures.dart';
 import '../../domain/repositories/auth_repository.dart';
-import '../datasource/remote_datasource.dart';
+import '../datasource/login_datasource.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final RemoteDatasource remoteDatasource;
+  final LoginDatasource remoteDatasource;
 
   AuthRepositoryImpl(this.remoteDatasource);
 
