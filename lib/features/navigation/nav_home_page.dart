@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../home/home_page.dart';
 
 class NavHomePage extends StatefulWidget {
-  const NavHomePage({Key? key}) : super(key: key);
+  const NavHomePage({super.key});
 
   @override
   State<NavHomePage> createState() => _NavHomePageState();

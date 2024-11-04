@@ -1,9 +1,25 @@
 import 'package:flutter/material.dart';
 
-import '../../core/components/button_widget.dart';
+import '../../core/components/button/button_controller.dart';
+import '../../core/components/button/button_widget.dart';
+import '../../core/constants/colors_constants.dart';
 
-class SplashPage extends StatelessWidget {
-  const SplashPage({Key? key}) : super(key: key);
+class SplashPage extends StatefulWidget {
+  const SplashPage({super.key});
+
+  @override
+  State<SplashPage> createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+  ButtonController buttonController = ButtonController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    buttonController.changeState(ButtonStateEnum.enabled);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,18 +53,31 @@ class SplashPage extends StatelessWidget {
               left: 20,
               right: 20,
             ),
-            child: ButtonWidget(
-                size: size,
-                onPressed: () {
-                  Navigator.popAndPushNamed(context, '/login_page');
-                },
-                textoButton: 'Vamos lá?'),
+            child: ValueListenableBuilder(
+                valueListenable: buttonController.buttonState,
+                builder: (_, buttonState, __) {
+                  return ButtonWidget(
+                      textButton: 'Vamos lá?',
+                      backgroundColor: AppColors.primary,
+                      buttonState: buttonState,
+                      onPressed: () {
+                        buttonController.buttonState.value =
+                            ButtonStateEnum.loading;
+                        //Simular que está buscando o token
+                        Future.delayed(const Duration(seconds: 1), () {
+                          Navigator.popAndPushNamed(
+                            context,
+                            '/login_page',
+                          );
+                        });
+                      });
+                }),
           ),
           Expanded(
             child: Container(
               width: size.width,
               decoration: const BoxDecoration(
-                color: Color(0xFFFFB228),
+                color: AppColors.primary,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(500),
                   topRight: Radius.circular(10),

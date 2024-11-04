@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../constants/colors_constants.dart';
+
 class InputWidget extends StatelessWidget {
-  final TextEditingController entradaController;
-  final TextInputType entradaTipo;
+  final TextEditingController controller;
+  final TextInputType keyboardType;
   final Color? color;
   final Color? corText;
-  final bool? mostrarSenha;
+  final bool? showPassword;
   final String labelInput;
   final IconData? sufixIcon;
   final Widget prefixIcon;
@@ -13,72 +15,64 @@ class InputWidget extends StatelessWidget {
   final GestureTapCallback? onPressIconPrefix;
 
   const InputWidget({
-    Key? key,
+    super.key,
     required this.labelInput,
-    required this.entradaController,
-    required this.entradaTipo,
-    required this.mostrarSenha,
+    required this.controller,
+    required this.keyboardType,
+    this.showPassword = false,
     required this.prefixIcon,
     this.onPressIconSufix,
     this.sufixIcon,
     this.onPressIconPrefix,
     this.color,
     this.corText,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return TextFormField(
-      obscureText: mostrarSenha ?? false,
-      controller: entradaController,
-      keyboardType: entradaTipo,
+    return TextField(
+      controller: controller,
+      obscureText: showPassword ?? false,
+      keyboardType: keyboardType,
+      cursorColor: const Color(0xFF656565),
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.only(right: -size.width * 0.05),
         labelText: labelInput,
         alignLabelWithHint: true,
-        border: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.grey,
-          ),
-          borderRadius: BorderRadius.all(
-            Radius.circular(7),
-          ),
-        ),
+        labelStyle: const TextStyle(color: Color(0xFF656565)),
+        contentPadding: EdgeInsets.only(right: -size.width * 0.05),
         prefixIcon: prefixIcon,
-        suffixIcon: IconButton(
-          icon: Icon(
-            sufixIcon,
-            color: const Color(0xFF656565),
+        suffixIcon: sufixIcon != null
+            ? IconButton(
+                onPressed: onPressIconSufix,
+                icon: Icon(
+                  sufixIcon,
+                  color: const Color(0xFF656565),
+                ),
+              )
+            : null,
+        border: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: AppColors.grey,
+            width: 2,
           ),
-          onPressed: onPressIconSufix,
+          borderRadius: BorderRadius.circular(7),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: AppColors.grey,
+            width: 2,
+          ),
+          borderRadius: BorderRadius.circular(7),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: AppColors.grey,
+            width: 2,
+          ),
+          borderRadius: BorderRadius.circular(7),
         ),
       ),
-      validator: (value) {
-        if (value!.isEmpty) {
-          return 'Preencha este campo!';
-        }
-        //Se for email, verificar se possui mais de 6 caracteres!
-        if (entradaTipo.toString() ==
-                TextInputType.visiblePassword.toString() &&
-            value.length < 6) {
-          return 'A senha deve ter no minimo 6 digitos!';
-        }
-
-        //Se for email, verificar se o formato é valido!
-        if (entradaTipo.toString() == TextInputType.emailAddress.toString()) {
-          String pattern =
-              r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-          RegExp regExp = RegExp(pattern);
-          if (!regExp.hasMatch(value)) {
-            return 'Este formato de email é inválido!';
-          } else {
-            return null;
-          }
-        }
-
-        return null;
-      },
     );
   }
 }

@@ -7,7 +7,7 @@ import 'widgets/card_categoria_widget.dart';
 import 'widgets/card_pets_widget.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();

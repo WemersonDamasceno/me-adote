@@ -9,13 +9,13 @@ class CardCategoryWidget extends StatelessWidget {
   final String title;
 
   const CardCategoryWidget({
-    Key? key,
+    super.key,
     required this.onPressed,
     required this.categorySelected,
     required this.pathImage,
     required this.index,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

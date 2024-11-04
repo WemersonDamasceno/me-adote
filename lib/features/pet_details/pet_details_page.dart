@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
-import '../../core/components/button_widget.dart';
+import '../../core/components/button/button_controller.dart';
+import '../../core/components/button/button_widget.dart';
 import '../../core/data/models/pet_model.dart';
 
 class PetDetailsPage extends StatefulWidget {
   final int idPet;
   final PetModel petModel;
   const PetDetailsPage({
-    Key? key,
+    super.key,
     required this.idPet,
     required this.petModel,
-  }) : super(key: key);
+  });
 
   @override
   State<PetDetailsPage> createState() => _PetDetailsPageState();
@@ -113,9 +114,10 @@ class _PetDetailsPageState extends State<PetDetailsPage> {
                         ),
                       ),
                       ButtonWidget(
-                        size: size,
+                        backgroundColor: const Color(0xFFFFB228),
+                        buttonState: ButtonStateEnum.enabled,
                         onPressed: () {},
-                        textoButton: 'Entrar em contato',
+                        textButton: 'Entrar em contato',
                       ),
                     ],
                   ),
