@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/components/button/button_controller.dart';
 import '../../../../core/errors/failures.dart';
+import '../../data/models/user_model.dart';
 import '../../domain/repositories/auth_repository.dart';
 
 class LoginController extends ChangeNotifier {
@@ -60,6 +61,26 @@ class LoginController extends ChangeNotifier {
     loginState.value = LoginState.success;
     this.token = token.$1!;
     return token.$1;
+  }
+
+  Future<bool> saveUser(UserModel user) async {
+    final result = await _authRepository.saveUser(user);
+
+    return result.$1;
+  }
+
+  Future<UserModel?> getUser(String uid) async {
+    final result = await _authRepository.getUser(uid);
+
+    if (result.$1 == null && result.$2 != null) {
+      if (result.$2 is ServerFailure) {
+        messageError = 'Ops, ocorreu um erro! Tente novamente.';
+        loginState.value = LoginState.error;
+
+        return null;
+      }
+    }
+    return result.$1!;
   }
 
   void verifyForm(createAccount) {
