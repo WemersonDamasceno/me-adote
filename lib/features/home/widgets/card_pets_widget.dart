@@ -7,10 +7,10 @@ class CardPetsWidget extends StatelessWidget {
   final PetModel itemPet;
   final Function() onPressed;
   const CardPetsWidget({
-    Key? key,
+    super.key,
     required this.itemPet,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class CardPetsWidget extends StatelessWidget {
       height: size.height * 0.36,
       decoration: BoxDecoration(
         color: Colors.white,
-        gradient: ColorConstants.linearColors,
+        gradient: AppColors.linearColors,
         borderRadius: BorderRadius.circular(7),
       ),
       child: Stack(
@@ -64,13 +64,13 @@ class CardPetsWidget extends StatelessWidget {
                 children: [
                   const Icon(
                     Icons.location_on_outlined,
-                    color: ColorConstants.cinzaTextColor,
+                    color: AppColors.grey,
                   ),
                   Text(
                     'Distancia (${itemPet.quantidadeKms}Km)',
                     style: const TextStyle(
                       fontWeight: FontWeight.w800,
-                      color: ColorConstants.cinzaTextColor,
+                      color: AppColors.grey,
                     ),
                   )
                 ],
@@ -85,7 +85,7 @@ class CardPetsWidget extends StatelessWidget {
                 itemPet.isFavorite
                     ? Icons.favorite
                     : Icons.favorite_border_rounded,
-                color: ColorConstants.primaryColor,
+                color: AppColors.primary,
                 size: 30,
               ),
             ),
