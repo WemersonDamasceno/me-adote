@@ -42,9 +42,9 @@ class EmailAlreadyInUseFailure extends Failure {
   const EmailAlreadyInUseFailure();
 }
 
-class PasswordTooWeakFailure extends Failure {
+class PasswordIsTooWeakFailure extends Failure {
   @override
   List<Object> get props => [];
 
-  const PasswordTooWeakFailure();
+  const PasswordIsTooWeakFailure();
 }

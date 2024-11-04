@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -248,12 +246,32 @@ class _LoginViewState extends State<LoginView> with SnackbarMixin {
           return ButtonWidget(
             buttonState: buttonState,
             backgroundColor: AppColors.primary,
-            onPressed: () {
-              // Aqui você pode adicionar o código para criar uma nova conta.
-              // Lembre-se de validar os campos e enviar os dados para a API de cadastro.
-              log('Nome: ${loginController.nameController.text}');
-              log('Email: ${loginController.emailController.text}');
-              log('Senha: ${loginController.passwordController.text}');
+            onPressed: () async {
+              loginController.buttonController
+                  .changeState(ButtonStateEnum.loading);
+              final token = await loginController.register(
+                loginController.emailController.text,
+                loginController.passwordController.text,
+                loginController.nameController.text,
+              );
+
+              if (token == null) {
+                loginController.buttonController
+                    .changeState(ButtonStateEnum.error);
+                Future.delayed(const Duration(seconds: 1)).whenComplete(() {
+                  loginController.buttonController
+                      .changeState(ButtonStateEnum.enabled);
+                });
+                return;
+              }
+              loginController.buttonController
+                  .changeState(ButtonStateEnum.success);
+              Future.delayed(const Duration(seconds: 1)).whenComplete(() {
+                Navigator.popAndPushNamed(
+                  context,
+                  '/home_page',
+                );
+              });
             },
             textButton: 'Criar Conta',
           );

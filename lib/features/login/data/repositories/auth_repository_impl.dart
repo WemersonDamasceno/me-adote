@@ -24,7 +24,21 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<String?> register(String email, String password, String name) {
-    return remoteDatasource.register(email, password, name);
+  Future<(String?, Failure?)> register(
+    String email,
+    String password,
+    String name,
+  ) async {
+    try {
+      final result = await remoteDatasource.register(email, password, name);
+
+      return Future.value((result, null));
+    } on EmailAlreadyInUseException {
+      return Future.value((null, const EmailAlreadyInUseFailure()));
+    } on PasswordIsTooWeakException {
+      return Future.value((null, const PasswordIsTooWeakFailure()));
+    } catch (e) {
+      return Future.value((null, const ServerFailure()));
+    }
   }
 }
