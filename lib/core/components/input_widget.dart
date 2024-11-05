@@ -12,6 +12,7 @@ class InputWidget extends StatelessWidget {
   final IconData? sufixIcon;
   final Widget prefixIcon;
   final GestureTapCallback? onPressIconSufix;
+  final Function(String) onChanged;
   final GestureTapCallback? onPressIconPrefix;
 
   const InputWidget({
@@ -26,6 +27,7 @@ class InputWidget extends StatelessWidget {
     this.onPressIconPrefix,
     this.color,
     this.corText,
+    required this.onChanged,
   });
 
   @override
@@ -33,6 +35,7 @@ class InputWidget extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return TextField(
       controller: controller,
+      onChanged: (value) => onChanged(value),
       obscureText: showPassword ?? false,
       keyboardType: keyboardType,
       cursorColor: const Color(0xFF656565),

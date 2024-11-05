@@ -20,8 +20,13 @@ class CardPetsWidget extends StatelessWidget {
       height: size.height * 0.36,
       decoration: BoxDecoration(
         color: Colors.white,
-        gradient: AppColors.linearColors,
         borderRadius: BorderRadius.circular(7),
+        gradient: const LinearGradient(
+          colors: [
+            Color.fromARGB(255, 144, 27, 194),
+            Color.fromARGB(255, 157, 68, 195),
+          ],
+        ),
       ),
       child: Stack(
         children: [
@@ -31,7 +36,7 @@ class CardPetsWidget extends StatelessWidget {
               Align(
                 alignment: Alignment.center,
                 child: Hero(
-                  tag: 'pet',
+                  tag: 'pet_${itemPet.nomePet}',
                   child: Container(
                     height: size.height * 0.27,
                     width: size.width * 0.45,

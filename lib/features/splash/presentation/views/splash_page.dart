@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../../core/components/button/button_controller.dart';
-import '../../core/components/button/button_widget.dart';
-import '../../core/constants/colors_constants.dart';
+import '../../../../core/components/button/button_controller.dart';
+import '../../../../core/components/button/button_widget.dart';
+import '../../../../core/constants/colors_constants.dart';
+import '../../../../core/utils/session/user_session.dart';
+import '../controllers/splash_controller.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -13,12 +16,15 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   ButtonController buttonController = ButtonController();
+  late SplashController _splashController;
 
   @override
   void initState() {
     super.initState();
 
     buttonController.changeState(ButtonStateEnum.enabled);
+
+    _splashController = Provider.of<SplashController>(context, listen: false);
   }
 
   @override
@@ -60,14 +66,24 @@ class _SplashPageState extends State<SplashPage> {
                       textButton: 'Vamos lá?',
                       backgroundColor: AppColors.primary,
                       buttonState: buttonState,
-                      onPressed: () {
-                        buttonController.buttonState.value =
-                            ButtonStateEnum.loading;
-                        //Simular que está buscando o token
-                        Future.delayed(const Duration(seconds: 1), () {
+                      onPressed: () async {
+                        buttonController.changeState(ButtonStateEnum.loading);
+
+                        String? token = await _splashController.getToken();
+
+                        if (token != null) {
+                          // ******* Get remote user and Save local ************
+                          final userRemote =
+                              await _splashController.getUser(token);
+                          Provider.of<UserSession>(context, listen: false)
+                              .setUser(userRemote);
+                        }
+
+                        Future.delayed(const Duration(seconds: 1))
+                            .whenComplete(() {
                           Navigator.popAndPushNamed(
                             context,
-                            '/login_page',
+                            token != null ? '/home_page' : '/login_page',
                           );
                         });
                       });

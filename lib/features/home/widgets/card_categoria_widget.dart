@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/constants/colors_constants.dart';
+
 class CardCategoryWidget extends StatelessWidget {
   final Function() onPressed;
-
   final int categorySelected;
   final String pathImage;
   final int index;
@@ -26,11 +27,11 @@ class CardCategoryWidget extends StatelessWidget {
           child: Container(
             height: 50,
             width: 70,
+            padding: const EdgeInsets.all(2),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(7),
-              color: categorySelected == index
-                  ? const Color(0xFFFFB228)
-                  : Colors.white,
+              color:
+                  categorySelected == index ? AppColors.primary : Colors.white,
             ),
             child: Image.asset(
               pathImage,

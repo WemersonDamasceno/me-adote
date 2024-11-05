@@ -7,6 +7,7 @@ import '../../core/data/models/pet_model.dart';
 class PetDetailsPage extends StatefulWidget {
   final int idPet;
   final PetModel petModel;
+
   const PetDetailsPage({
     super.key,
     required this.idPet,
@@ -40,26 +41,29 @@ class _PetDetailsPageState extends State<PetDetailsPage> {
         child: Stack(
           children: [
             Positioned(
-                child: SizedBox(
-                    height: size.height * 0.55,
-                    child: Hero(
-                      tag: 'pet',
-                      child: Image.network(
-                        petModel.urlImage,
-                        fit: BoxFit.cover,
-                      ),
-                    ))),
+              child: SizedBox(
+                height: size.height * 0.55,
+                child: Hero(
+                  tag: 'pet_${petModel.nomePet}',
+                  child: Image.network(
+                    petModel.urlImage,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
             Positioned(
               top: size.height * 0.5,
               left: 0,
               right: 0,
               child: Container(
                 decoration: const BoxDecoration(
-                    color: Color(0xFF1E1E1E),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(24),
-                      topRight: Radius.circular(24),
-                    )),
+                  color: Color(0xFF1E1E1E),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(24),
+                    topRight: Radius.circular(24),
+                  ),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Column(
@@ -125,18 +129,19 @@ class _PetDetailsPageState extends State<PetDetailsPage> {
               ),
             ),
             Positioned(
-                top: size.height * 0.04,
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(300)),
-                  child: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(
-                        Icons.arrow_back,
-                      )),
-                )),
+              top: size.height * 0.04,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(300),
+                ),
+                child: IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(
+                    Icons.arrow_back,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -153,11 +158,13 @@ class _PetDetailsPageState extends State<PetDetailsPage> {
       ),
       child: Column(
         children: [
-          Text(titulo,
-              style: const TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.w700,
-              )),
+          Text(
+            titulo,
+            style: const TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
           Text(valor),
         ],
       ),
