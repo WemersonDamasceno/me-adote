@@ -107,7 +107,7 @@ class _PetDetailsPageState extends State<PetDetailsPage> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 10, bottom: 15),
+                        padding: const EdgeInsets.only(top: 10, bottom: 48),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

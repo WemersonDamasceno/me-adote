@@ -48,9 +48,9 @@ class _HomePageState extends State<HomePage> with SnackbarMixin {
         idade: 2,
         peso: 5,
         descricao:
-            '“Au au au AU AU Au au Au au” \nOlá, não tenha medo, ele late quando fica feliz com alguém chegando.',
+            'Um adorável cachorro de 3 anos que está à procura de um lar cheio de amor. Ele tem uma pelagem curta, seu olhar calmo e seu jeitinho carinhoso. ',
         isFavorite: false,
-        nomePet: 'Meião',
+        nomePet: 'Max',
         endereco: 'Av. José Caetano, 134',
         urlImage:
             'https://conteudo.imguol.com.br/c/entretenimento/54/2020/04/28/cachorro-pug-1588098472110_v2_1x1.jpg',
@@ -101,7 +101,6 @@ class _HomePageState extends State<HomePage> with SnackbarMixin {
                     Navigator.push(
                       context,
                       PageRouteBuilder(
-                        transitionDuration: const Duration(seconds: 5),
                         pageBuilder: (_, __, ___) => PetDetailsPage(
                           idPet: index,
                           petModel: listPets[index],

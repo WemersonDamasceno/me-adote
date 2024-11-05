@@ -7,6 +7,7 @@ import '../../../../core/components/input_widget.dart';
 import '../../../../core/components/snackbar/snackbar_mixin.dart';
 import '../../../../core/constants/colors_constants.dart';
 import '../../../../core/utils/session/user_session.dart';
+import '../../data/models/user_model.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends StatefulWidget {
@@ -37,8 +38,6 @@ class _LoginViewState extends State<LoginView> with SnackbarMixin {
     loginController.passwordController.text = '';
 
     loginController.buttonController.changeState(ButtonStateEnum.disabled);
-
-    // Remover o listener
     loginController.loginState.removeListener(() => _listenerLoginState());
 
     super.dispose();
@@ -57,8 +56,13 @@ class _LoginViewState extends State<LoginView> with SnackbarMixin {
               ValueListenableBuilder(
                 valueListenable: createAccount,
                 builder: (_, value, __) {
+                  final isLargeDevice = size.height > 710;
                   return Positioned(
-                    top: value ? size.height * 0.4 : size.height * 0.5,
+                    top: isLargeDevice || !value
+                        ? size.height * 0.5
+                        : value
+                            ? size.height * 0.4
+                            : size.height * 0.3,
                     left: 0,
                     right: 0,
                     child: Container(
@@ -146,22 +150,24 @@ class _LoginViewState extends State<LoginView> with SnackbarMixin {
               ),
             ],
           ),
-          const SizedBox(height: 26),
-          Visibility(
-            visible: isLogin,
-            child: _buildGenericButton('Entrar', () async {
-              return await loginController.login(
-                loginController.emailController.text,
-                loginController.passwordController.text,
-              );
-            }),
-            replacement: _buildGenericButton('Criar Conta', () async {
-              return await loginController.register(
-                loginController.emailController.text,
-                loginController.passwordController.text,
-                loginController.nameController.text,
-              );
-            }),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 24),
+            child: Visibility(
+              visible: isLogin,
+              child: _buildGenericButton('Entrar', () async {
+                return await loginController.login(
+                  loginController.emailController.text,
+                  loginController.passwordController.text,
+                );
+              }, isLogin),
+              replacement: _buildGenericButton('Criar Conta', () async {
+                return await loginController.register(
+                  loginController.emailController.text,
+                  loginController.passwordController.text,
+                  loginController.nameController.text,
+                );
+              }, isLogin),
+            ),
           ),
         ],
       ),
@@ -207,6 +213,7 @@ class _LoginViewState extends State<LoginView> with SnackbarMixin {
   Widget _buildGenericButton(
     String text,
     Future<String?> Function() onPressedAction,
+    bool isLogin,
   ) {
     return ValueListenableBuilder(
       valueListenable: loginController.buttonController.buttonState,
@@ -222,15 +229,28 @@ class _LoginViewState extends State<LoginView> with SnackbarMixin {
               _setErroInButton();
               return;
             }
-            if (!mounted)
-              return; // Verifique se o widget está montado antes de usar o contexto
+            if (!mounted) {
+              return;
+            }
 
             await loginController.saveToken(uuid);
             final sessionUser = Provider.of<UserSession>(
               context,
               listen: false,
             );
-            sessionUser.setUser(await loginController.getUser(uuid));
+
+            UserModel? user;
+            if (isLogin) {
+              user = await loginController.getUser(uuid);
+            } else {
+              user = UserModel(
+                uid: uuid,
+                email: loginController.emailController.text,
+                name: loginController.nameController.text,
+              );
+            }
+
+            sessionUser.setUser(user);
 
             Navigator.popAndPushNamed(context, '/home_page');
           },

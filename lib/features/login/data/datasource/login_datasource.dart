@@ -9,25 +9,16 @@ enum SharedPreferencesKeys { token }
 
 abstract class LoginDatasource {
   Future<String?> login(String email, String password);
-
   Future<String?> register(String email, String password, String name);
-
   Future<bool?> logout();
-
   Future<bool> saveUser(UserModel user);
-
   Future<UserModel> getUser(String uid);
-
   Future<bool> saveToken(String token);
-
   Future<bool> deleteToken();
-
   Future<String?> getToken();
 }
 
 class LoginDatasourceImpl implements LoginDatasource {
-  FirebaseFirestore instanceFB = FirebaseFirestore.instance;
-
   @override
   Future<String?> login(String email, String password) async {
     try {
@@ -84,7 +75,10 @@ class LoginDatasourceImpl implements LoginDatasource {
   @override
   Future<bool> saveUser(UserModel user) async {
     try {
-      await instanceFB.collection('users').doc(user.uid).set(user.toMap());
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .set(user.toMap());
       return true;
     } on FirebaseException {
       throw const ServerException();
@@ -96,7 +90,12 @@ class LoginDatasourceImpl implements LoginDatasource {
   @override
   Future<UserModel> getUser(String uid) async {
     try {
-      final user = await instanceFB.collection('users').doc(uid).get();
+      final user = await FirebaseFirestore.instance
+          .collection(
+            'users',
+          )
+          .doc(uid)
+          .get();
       return UserModel.fromMap(user.id, user.data()!);
     } on FirebaseException {
       throw const ServerException();
