@@ -9,8 +9,12 @@ abstract class AuthRepository {
     String name,
   );
 
-  Future<(bool, Failure?)> saveUser(UserModel user);
+  Future<(bool?, Failure?)> logout();
+
+  Future<(bool?, Failure?)> saveUser(UserModel user);
   Future<(UserModel?, Failure?)> getUser(String uid);
 
-  Future<(bool, Failure?)> saveToken(String token);
+  Future<(bool?, Failure?)> saveToken(String token);
+
+  Future<(bool?, Failure?)> deleteToken();
 }

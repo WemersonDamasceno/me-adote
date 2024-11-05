@@ -12,11 +12,15 @@ abstract class LoginDatasource {
 
   Future<String?> register(String email, String password, String name);
 
+  Future<bool?> logout();
+
   Future<bool> saveUser(UserModel user);
 
   Future<UserModel> getUser(String uid);
 
   Future<bool> saveToken(String token);
+
+  Future<bool> deleteToken();
 
   Future<String?> getToken();
 }
@@ -68,6 +72,16 @@ class LoginDatasourceImpl implements LoginDatasource {
   }
 
   @override
+  Future<bool?> logout() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      return true;
+    } catch (e) {
+      throw const ServerException();
+    }
+  }
+
+  @override
   Future<bool> saveUser(UserModel user) async {
     try {
       await instanceFB.collection('users').doc(user.uid).set(user.toMap());
@@ -109,6 +123,16 @@ class LoginDatasourceImpl implements LoginDatasource {
     try {
       final _sharedPrefs = await SharedPreferences.getInstance();
       return _sharedPrefs.getString(SharedPreferencesKeys.token.name);
+    } catch (e) {
+      throw const ServerException();
+    }
+  }
+
+  @override
+  Future<bool> deleteToken() async {
+    try {
+      final _sharedPrefs = await SharedPreferences.getInstance();
+      return await _sharedPrefs.remove(SharedPreferencesKeys.token.name);
     } catch (e) {
       throw const ServerException();
     }

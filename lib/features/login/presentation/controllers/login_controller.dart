@@ -72,7 +72,7 @@ class LoginController extends ChangeNotifier {
   Future<bool> saveUser(UserModel user) async {
     final result = await _authRepository.saveUser(user);
 
-    return result.$1;
+    return result.$1 ?? false;
   }
 
   Future<UserModel?> getUser(String uid) async {
@@ -83,7 +83,7 @@ class LoginController extends ChangeNotifier {
   Future<bool> saveToken(String token) async {
     final result = await _authRepository.saveToken(token);
 
-    return result.$1;
+    return result.$1 ?? false;
   }
 
   void verifyForm(createAccount) {

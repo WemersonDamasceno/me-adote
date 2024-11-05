@@ -1,6 +1,7 @@
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
+import '../../features/home/controllers/home_controller.dart';
 import '../../features/login/data/datasource/login_datasource.dart';
 import '../../features/login/data/repositories/auth_repository_impl.dart';
 import '../../features/login/domain/repositories/auth_repository.dart';
@@ -61,5 +62,12 @@ class DIHelper {
         _.read<AuthRepository>(),
       ),
     ),
+
+    //***** Home ******** //
+    Provider<HomeController>(
+      create: (_) => HomeController(
+        _.read<AuthRepository>(),
+      ),
+    )
   ];
 }
