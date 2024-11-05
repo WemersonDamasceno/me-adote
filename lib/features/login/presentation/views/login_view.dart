@@ -32,6 +32,19 @@ class _LoginViewState extends State<LoginView> with SnackbarMixin {
   }
 
   @override
+  void dispose() {
+    loginController.emailController.text = '';
+    loginController.passwordController.text = '';
+
+    loginController.buttonController.changeState(ButtonStateEnum.disabled);
+
+    // Remover o listener
+    loginController.loginState.removeListener(() => _listenerLoginState());
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -209,10 +222,14 @@ class _LoginViewState extends State<LoginView> with SnackbarMixin {
               _setErroInButton();
               return;
             }
+            if (!mounted)
+              return; // Verifique se o widget está montado antes de usar o contexto
 
             await loginController.saveToken(uuid);
-            final sessionUser =
-                Provider.of<UserSession>(context, listen: false);
+            final sessionUser = Provider.of<UserSession>(
+              context,
+              listen: false,
+            );
             sessionUser.setUser(await loginController.getUser(uuid));
 
             Navigator.popAndPushNamed(context, '/home_page');
@@ -230,6 +247,7 @@ class _LoginViewState extends State<LoginView> with SnackbarMixin {
   }
 
   void _listenerLoginState() {
+    if (!mounted) return; // Verifica se o widget ainda está montado
     if (loginController.loginState.value == LoginState.error) {
       showSnackbarWithError(
         context: context,

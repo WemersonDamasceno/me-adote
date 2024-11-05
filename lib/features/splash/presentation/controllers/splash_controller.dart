@@ -14,6 +14,6 @@ class SplashController {
 
   Future<UserModel?> getUser(String uid) async {
     final result = await _authRepository.getUser(uid);
-    return result.$1!;
+    return result.$1;
   }
 }
