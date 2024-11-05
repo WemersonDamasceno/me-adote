@@ -11,4 +11,6 @@ abstract class AuthRepository {
 
   Future<(bool, Failure?)> saveUser(UserModel user);
   Future<(UserModel?, Failure?)> getUser(String uid);
+
+  Future<(bool, Failure?)> saveToken(String token);
 }

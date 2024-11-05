@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/errors/exceptions.dart';
 import '../models/user_model.dart';
+
+enum SharedPreferencesKeys { token }
 
 abstract class LoginDatasource {
   Future<String?> login(String email, String password);
@@ -12,6 +15,10 @@ abstract class LoginDatasource {
   Future<bool> saveUser(UserModel user);
 
   Future<UserModel> getUser(String uid);
+
+  Future<bool> saveToken(String token);
+
+  Future<String?> getToken();
 }
 
 class LoginDatasourceImpl implements LoginDatasource {
@@ -79,6 +86,29 @@ class LoginDatasourceImpl implements LoginDatasource {
       return UserModel.fromMap(user.id, user.data()!);
     } on FirebaseException {
       throw const ServerException();
+    } catch (e) {
+      throw const ServerException();
+    }
+  }
+
+  @override
+  Future<bool> saveToken(String token) async {
+    try {
+      final _sharedPrefs = await SharedPreferences.getInstance();
+      return await _sharedPrefs.setString(
+        SharedPreferencesKeys.token.name,
+        token,
+      );
+    } catch (e) {
+      throw const ServerException();
+    }
+  }
+
+  @override
+  Future<String?> getToken() async {
+    try {
+      final _sharedPrefs = await SharedPreferences.getInstance();
+      return _sharedPrefs.getString(SharedPreferencesKeys.token.name);
     } catch (e) {
       throw const ServerException();
     }

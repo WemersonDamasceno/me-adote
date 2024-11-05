@@ -64,4 +64,14 @@ class AuthRepositoryImpl implements AuthRepository {
       return Future.value((null, const ServerFailure()));
     }
   }
+
+  @override
+  Future<(bool, Failure?)> saveToken(String token) async {
+    try {
+      final result = await remoteDatasource.saveToken(token);
+      return Future.value((result, null));
+    } on ServerException {
+      return Future.value((false, const ServerFailure()));
+    }
+  }
 }

@@ -21,6 +21,7 @@ class LoginController extends ChangeNotifier {
 
   Future<String?> login(String email, String password) async {
     loginState.value = LoginState.loading;
+    buttonController.changeState(ButtonStateEnum.loading);
     final token = await _authRepository.login(email, password);
 
     if (token.$1 == null && token.$2 != null) {
@@ -32,17 +33,20 @@ class LoginController extends ChangeNotifier {
         messageError = 'Ops, ocorreu um erro! Tente novamente.';
       }
       loginState.value = LoginState.error;
+      buttonController.changeState(ButtonStateEnum.error);
 
       return null;
     }
 
     loginState.value = LoginState.success;
+    buttonController.changeState(ButtonStateEnum.success);
     this.token = token.$1!;
     return token.$1;
   }
 
   Future<String?> register(String email, String password, String name) async {
     loginState.value = LoginState.loading;
+    buttonController.changeState(ButtonStateEnum.loading);
     final token = await _authRepository.register(email, password, name);
 
     if (token.$1 == null && token.$2 != null) {
@@ -54,11 +58,13 @@ class LoginController extends ChangeNotifier {
         messageError = 'Ops, ocorreu um erro! Tente novamente.';
       }
       loginState.value = LoginState.error;
+      buttonController.changeState(ButtonStateEnum.error);
 
       return null;
     }
 
     loginState.value = LoginState.success;
+    buttonController.changeState(ButtonStateEnum.success);
     this.token = token.$1!;
     return token.$1;
   }
@@ -71,16 +77,13 @@ class LoginController extends ChangeNotifier {
 
   Future<UserModel?> getUser(String uid) async {
     final result = await _authRepository.getUser(uid);
-
-    if (result.$1 == null && result.$2 != null) {
-      if (result.$2 is ServerFailure) {
-        messageError = 'Ops, ocorreu um erro! Tente novamente.';
-        loginState.value = LoginState.error;
-
-        return null;
-      }
-    }
     return result.$1!;
+  }
+
+  Future<bool> saveToken(String token) async {
+    final result = await _authRepository.saveToken(token);
+
+    return result.$1;
   }
 
   void verifyForm(createAccount) {

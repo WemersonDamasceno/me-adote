@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'core/di/di.dart';
 import 'features/login/presentation/views/login_page.dart';
 import 'features/navigation/nav_home_page.dart';
-import 'features/splash/splash_page.dart';
+import 'features/splash/presentation/views/splash_page.dart';
 import 'firebase_options.dart';
 
 void main() async {

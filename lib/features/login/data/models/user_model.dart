@@ -3,14 +3,14 @@ import 'package:equatable/equatable.dart';
 class UserModel extends Equatable {
   final String email;
   final String name;
-  final String urlImage;
-  final String? uid;
+  final String? urlImage;
+  final String uid;
 
   const UserModel({
     required this.email,
     required this.name,
-    required this.urlImage,
-    this.uid,
+    required this.uid,
+    this.urlImage,
   });
 
   Map<String, dynamic> toMap() {
