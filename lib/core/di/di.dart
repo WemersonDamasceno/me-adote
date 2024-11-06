@@ -10,6 +10,7 @@ import '../../features/splash/data/datasources/splash_datasource.dart';
 import '../../features/splash/data/repositories/splash_repository_impl.dart';
 import '../../features/splash/domain/repositories/splash_repository.dart';
 import '../../features/splash/presentation/controllers/splash_controller.dart';
+import '../utils/session/cart_session.dart';
 import '../utils/session/user_session.dart';
 
 class DIHelper {
@@ -26,6 +27,9 @@ class DIHelper {
     //***** Core ******** */
     Provider<UserSession>(
       create: (_) => UserSession(),
+    ),
+    Provider<CartSession>(
+      create: (_) => CartSession(),
     ),
 
     //***** Login ******** */

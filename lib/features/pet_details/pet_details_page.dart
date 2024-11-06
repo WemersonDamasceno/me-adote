@@ -35,7 +35,7 @@ class _PetDetailsPageState extends State<PetDetailsPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: const Color(0xFF1E1E1E),
+      backgroundColor: const Color(0xFF1b1f23),
       body: SizedBox(
         height: size.height,
         child: Stack(
@@ -58,7 +58,7 @@ class _PetDetailsPageState extends State<PetDetailsPage> {
               right: 0,
               child: Container(
                 decoration: const BoxDecoration(
-                  color: Color(0xFF1E1E1E),
+                  color: Color(0xFF1b1f23),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(24),
                     topRight: Radius.circular(24),

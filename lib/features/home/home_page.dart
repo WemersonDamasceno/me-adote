@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/components/search_input/search_input.dart';
 import '../../core/components/snackbar/snackbar_mixin.dart';
 import '../../core/data/models/pet_model.dart';
-import '../../core/utils/extensions/name_extension.dart';
-import '../../core/utils/session/user_session.dart';
-import '../login/presentation/views/login_page.dart';
 import '../pet_details/pet_details_page.dart';
 import 'controllers/home_controller.dart';
 import 'models/card_categoria.dart';
@@ -69,7 +67,7 @@ class _HomePageState extends State<HomePage> with SnackbarMixin {
         quantidadeKms: '5'),
   ];
 
-  final procurarController = TextEditingController();
+  final searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -80,12 +78,11 @@ class _HomePageState extends State<HomePage> with SnackbarMixin {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: cabecalho(size),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            child: campoDeBusca(size),
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: SearchInput(
+              controller: searchController,
+              hintText: 'Procure por um pet',
+            ),
           ),
           categorias(size),
           Expanded(
@@ -129,84 +126,6 @@ class _HomePageState extends State<HomePage> with SnackbarMixin {
     );
   }
 
-  Widget cabecalho(Size size) {
-    final sessionUser = Provider.of<UserSession>(context);
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(
-                  width: 2,
-                  color: Colors.white,
-                ),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(100),
-                ),
-                image: const DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage('https://i.pravatar.cc/332'),
-                ),
-              ),
-              height: size.width * 0.12,
-              width: size.width * 0.12,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Text(
-                'Olá, ${sessionUser.user?.name.firstName}!',
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 5),
-          child: InkWell(
-            onTap: () async {
-              final logoutIsSuccess = await _homeController.logout();
-              final tokenIsDeleted = await _homeController.deleteToken();
-
-              if (tokenIsDeleted == false || logoutIsSuccess == false) {
-                showSnackbarWithError(
-                  context: context,
-                  message: 'Erro ao realizar o logout!',
-                  backgroundColor: const Color(0xFFD65745),
-                  buttonColor: Colors.red,
-                  buttonLabel: 'Fechar',
-                  fontColor: Colors.white,
-                );
-
-                return;
-              }
-
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const LoginPage(),
-                ),
-                (route) => false,
-              );
-            },
-            child: const Icon(
-              Icons.login_outlined,
-              color: Colors.white,
-              size: 30,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget categorias(size) {
     return SizedBox(
       height: 75,
@@ -230,28 +149,6 @@ class _HomePageState extends State<HomePage> with SnackbarMixin {
                 },
               ));
         },
-      ),
-    );
-  }
-
-  Widget campoDeBusca(size) {
-    return TextFormField(
-      controller: procurarController,
-      decoration: InputDecoration(
-        contentPadding: EdgeInsets.only(right: -size.width * 0.05),
-        hintText: 'Procure por um pet',
-        alignLabelWithHint: true,
-        filled: true,
-        fillColor: Colors.white,
-        border: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.grey,
-          ),
-          borderRadius: BorderRadius.all(
-            Radius.circular(7),
-          ),
-        ),
-        prefixIcon: const Icon(Icons.search_rounded),
       ),
     );
   }
