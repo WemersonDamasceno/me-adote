@@ -248,6 +248,8 @@ class _LoginViewState extends State<LoginView> with SnackbarMixin {
                 email: loginController.emailController.text,
                 name: loginController.nameController.text,
               );
+
+              await loginController.saveUser(user);
             }
 
             sessionUser.setUser(user);
