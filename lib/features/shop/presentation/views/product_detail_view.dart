@@ -4,8 +4,9 @@ import 'package:provider/provider.dart';
 import '../../../../core/components/button/button_controller.dart';
 import '../../../../core/components/button/button_widget.dart';
 import '../../../../core/components/cart_icon_with_counter.dart';
-import '../../../../core/constants/colors_constants.dart';
+import '../../../../core/constants/app_colors.dart';
 import '../../../../core/utils/session/cart_session.dart';
+import '../../../cart/presentation/view/cart_view.dart';
 import '../../data/models/product_model.dart';
 
 class ProductDetailView extends StatefulWidget {
@@ -33,7 +34,7 @@ class _ProductDetailViewState extends State<ProductDetailView>
 
     await Future.delayed(const Duration(seconds: 1));
     _buttonStateNotifier.value = ButtonStateEnum.success;
-    _cartSession.productCount.value += _quantity;
+    _cartSession.addProduct(widget.product);
     _initAnimation(buttonKey);
   }
 
@@ -109,10 +110,10 @@ class _ProductDetailViewState extends State<ProductDetailView>
     final GlobalKey buttonKey = GlobalKey();
 
     return Scaffold(
-      backgroundColor: const Color(0xFF1b1f23),
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        surfaceTintColor: const Color(0xFF1b1f23),
-        backgroundColor: const Color(0xFF1b1f23),
+        surfaceTintColor: AppColors.background,
+        backgroundColor: AppColors.background,
         foregroundColor: Colors.white,
         title: const Text(
           'Detalhes do produto',
@@ -122,7 +123,13 @@ class _ProductDetailViewState extends State<ProductDetailView>
           CartIconWithCounter(
             key: _cartKey,
             cartSession: _cartSession,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const CartScreen(),
+                ),
+              );
+            },
           ),
         ],
       ),

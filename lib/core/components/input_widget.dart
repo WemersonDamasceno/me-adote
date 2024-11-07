@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants/colors_constants.dart';
+import '../constants/app_colors.dart';
 
 class InputWidget extends StatelessWidget {
   final TextEditingController controller;
