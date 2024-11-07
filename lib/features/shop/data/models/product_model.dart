@@ -5,6 +5,7 @@ class ProductModel {
   final String description;
   final double price;
   final String imageUrl;
+  int quantity;
 
   ProductModel({
     required this.promotion,
@@ -13,7 +14,19 @@ class ProductModel {
     required this.description,
     required this.price,
     required this.imageUrl,
+    this.quantity = 1,
   });
+
+  factory ProductModel.empty() {
+    return ProductModel(
+      id: '',
+      promotion: PromotionProductModel(id: '', isActive: false, price: 0.0),
+      name: '',
+      description: '',
+      price: 0.0,
+      imageUrl: '',
+    );
+  }
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
@@ -23,6 +36,7 @@ class ProductModel {
       description: json['description'],
       price: json['price'],
       imageUrl: json['imageUrl'],
+      quantity: json['quantity'] ?? 1, // Pega a quantidade se disponível
     );
   }
 
@@ -34,6 +48,7 @@ class ProductModel {
       'description': description,
       'price': price,
       'imageUrl': imageUrl,
+      'quantity': quantity,
     };
   }
 }

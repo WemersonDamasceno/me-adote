@@ -5,7 +5,7 @@ import '../../../../core/components/button/button_controller.dart';
 import '../../../../core/components/button/button_widget.dart';
 import '../../../../core/components/input_widget.dart';
 import '../../../../core/components/snackbar/snackbar_mixin.dart';
-import '../../../../core/constants/colors_constants.dart';
+import '../../../../core/constants/app_colors.dart';
 import '../../../../core/utils/session/user_session.dart';
 import '../../data/models/user_model.dart';
 import '../controllers/login_controller.dart';

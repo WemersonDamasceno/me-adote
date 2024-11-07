@@ -8,6 +8,7 @@ import '../../../../core/components/image_carousel.dart';
 import '../../../../core/components/search_input/search_input.dart';
 import '../../../../core/utils/extensions/money_extension.dart';
 import '../../../../core/utils/session/cart_session.dart';
+import '../../../cart/presentation/view/cart_view.dart';
 import '../mocks/products_mock.dart';
 import '../widgets/category_product.dart';
 import 'product_detail_view.dart';
@@ -59,7 +60,13 @@ class _ProductListViewState extends State<ProductListView> {
                   ),
                   CartIconWithCounter(
                     cartSession: _cartSession,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const CartScreen(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
