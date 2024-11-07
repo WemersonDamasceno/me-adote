@@ -2,6 +2,8 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../home/home_page.dart';
+import '../profile/presentation/view/profile_view.dart';
+import '../shop/presentation/views/product_list_view.dart';
 
 class NavHomePage extends StatefulWidget {
   const NavHomePage({super.key});
@@ -13,16 +15,12 @@ class NavHomePage extends StatefulWidget {
 class _NavHomePageState extends State<NavHomePage> {
   int _selectedIndex = 0;
   final widgetsPaginas = [
+    const ProductListView(),
     const HomePage(),
-    const Text(
-      'Index 1: Favoritos',
-    ),
     const Text(
       'Index 2: Notificacao',
     ),
-    const Text(
-      'Index 3: Busca',
-    ),
+    const ProfileView(),
   ];
 
   void _onItemTapped(int index) {
@@ -33,19 +31,18 @@ class _NavHomePageState extends State<NavHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: const Color(0xFF1E1E1E),
+      backgroundColor: const Color(0xFF1b1f23),
       body: SafeArea(
         child: widgetsPaginas[_selectedIndex],
       ),
       bottomNavigationBar: CurvedNavigationBar(
         index: 0,
-        height: size.height * 0.08,
+        height: kBottomNavigationBarHeight + 10,
         items: const [
-          Icon(Icons.home_rounded, size: 30, color: Colors.white),
-          Icon(Icons.favorite_rounded, size: 30, color: Colors.white),
-          Icon(Icons.search_rounded, size: 30, color: Colors.white),
+          Icon(Icons.shopify_rounded, size: 30, color: Colors.white),
+          Icon(Icons.pets, size: 30, color: Colors.white),
+          Icon(Icons.notifications, size: 30, color: Colors.white),
           Icon(Icons.person, size: 30, color: Colors.white),
         ],
         color: const Color(0xFFFFB228),
@@ -53,10 +50,10 @@ class _NavHomePageState extends State<NavHomePage> {
         backgroundColor: Colors.transparent,
         animationCurve: Curves.easeInOut,
         animationDuration: const Duration(milliseconds: 400),
+        letIndexChange: (index) => true,
         onTap: (index) {
           _onItemTapped(index);
         },
-        letIndexChange: (index) => true,
       ),
     );
   }
