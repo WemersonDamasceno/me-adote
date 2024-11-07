@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/components/button/button_controller.dart';
 import '../../../../core/components/button/button_widget.dart';
-import '../../../../core/constants/colors_constants.dart';
+import '../../../../core/constants/app_colors.dart';
 import '../../../../core/utils/session/user_session.dart';
 import '../controllers/splash_controller.dart';
 
@@ -31,7 +31,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: const Color(0xFF1b1f23),
+      backgroundColor: AppColors.background,
       body: Column(
         children: [
           const Padding(

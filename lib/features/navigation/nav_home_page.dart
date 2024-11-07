@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/constants/app_colors.dart';
 import '../home/home_page.dart';
 import '../profile/presentation/view/profile_view.dart';
 import '../shop/presentation/views/product_list_view.dart';
@@ -32,7 +33,7 @@ class _NavHomePageState extends State<NavHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1b1f23),
+      backgroundColor: AppColors.background,
       body: SafeArea(
         child: widgetsPaginas[_selectedIndex],
       ),

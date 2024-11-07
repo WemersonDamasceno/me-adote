@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/components/button/button_controller.dart';
 import '../../core/components/button/button_widget.dart';
+import '../../core/constants/app_colors.dart';
 import '../../core/data/models/pet_model.dart';
 
 class PetDetailsPage extends StatefulWidget {
@@ -35,7 +36,7 @@ class _PetDetailsPageState extends State<PetDetailsPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: const Color(0xFF1b1f23),
+      backgroundColor: AppColors.background,
       body: SizedBox(
         height: size.height,
         child: Stack(
@@ -58,7 +59,7 @@ class _PetDetailsPageState extends State<PetDetailsPage> {
               right: 0,
               child: Container(
                 decoration: const BoxDecoration(
-                  color: Color(0xFF1b1f23),
+                  color: AppColors.background,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(24),
                     topRight: Radius.circular(24),
