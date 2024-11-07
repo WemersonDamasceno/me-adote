@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/constants/app_colors.dart';
+
 class CategoryProduct extends StatelessWidget {
   const CategoryProduct({super.key});
 
@@ -91,7 +93,7 @@ class CategoryItem extends StatelessWidget {
             child: CircleAvatar(
               radius: 40,
               backgroundColor: Colors.white,
-              child: Icon(iconData, color: const Color(0xFF1b1f23)),
+              child: Icon(iconData, color: AppColors.background),
             ),
           ),
           const SizedBox(height: 8),
