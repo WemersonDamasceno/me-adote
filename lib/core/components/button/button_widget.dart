@@ -59,6 +59,7 @@ class ButtonWidget extends StatelessWidget {
         default:
           return Text(
             textButton,
+            textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: 20,
               color: Colors.white,
