@@ -126,7 +126,7 @@ class _ProductDetailViewState extends State<ProductDetailView>
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const CartScreen(),
+                  builder: (context) => const CartView(),
                 ),
               );
             },

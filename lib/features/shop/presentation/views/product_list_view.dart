@@ -56,6 +56,7 @@ class _ProductListViewState extends State<ProductListView> {
                       onTap: () => log('onTap'),
                       controller: _searchController,
                       hintText: 'Procure por um produto',
+                      prefixIcon: const Icon(Icons.search),
                     ),
                   ),
                   CartIconWithCounter(
@@ -63,7 +64,7 @@ class _ProductListViewState extends State<ProductListView> {
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const CartScreen(),
+                          builder: (context) => const CartView(),
                         ),
                       );
                     },

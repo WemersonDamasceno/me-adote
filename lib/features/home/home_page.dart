@@ -81,7 +81,9 @@ class _HomePageState extends State<HomePage> with SnackbarMixin {
             padding: const EdgeInsets.symmetric(vertical: 20.0),
             child: SearchInput(
               controller: searchController,
+              keyboardType: TextInputType.text,
               hintText: 'Procure por um pet',
+              prefixIcon: const Icon(Icons.search),
             ),
           ),
           categorias(size),

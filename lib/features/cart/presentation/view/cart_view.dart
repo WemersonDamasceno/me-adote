@@ -6,16 +6,17 @@ import '../../../../core/components/button/button_widget.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/utils/extensions/money_extension.dart';
 import '../../../../core/utils/session/cart_session.dart';
+import '../../../payment_method/presentation/views/payment_method_view.dart';
 import '../widget/bottom_item_widget.dart';
 
-class CartScreen extends StatefulWidget {
-  const CartScreen({super.key});
+class CartView extends StatefulWidget {
+  const CartView({super.key});
 
   @override
-  State<CartScreen> createState() => _CartScreenState();
+  State<CartView> createState() => _CartViewState();
 }
 
-class _CartScreenState extends State<CartScreen> {
+class _CartViewState extends State<CartView> {
   late CartSession cartSession;
 
   @override
@@ -216,7 +217,15 @@ class _CartScreenState extends State<CartScreen> {
                               ),
                             ),
                             ButtonWidget(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const PaymentMethodView(),
+                                  ),
+                                );
+                              },
                               textButton: 'Finalizar Compra',
                               buttonState: ButtonStateEnum.enabled,
                               backgroundColor: AppColors.primary,
