@@ -11,7 +11,7 @@ class CreditCard extends StatelessWidget {
     required this.cardNumber,
     required this.dateNumber,
     required this.cvv,
-    required this.flipAnimation,
+    this.flipAnimation = const AlwaysStoppedAnimation(0.0),
   });
 
   @override

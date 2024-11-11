@@ -1,7 +1,7 @@
+import 'package:flutter_login/login/data/datasource/login_datasource.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/errors/exceptions.dart';
-import '../../../login/data/datasource/login_datasource.dart';
 
 abstract class SplashDatasource {
   Future<String?> getToken();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/components/button/button_controller.dart';
 import '../../../../core/components/button/button_widget.dart';
@@ -6,6 +7,7 @@ import '../../../../core/components/formatters/credit_card_formatter.dart';
 import '../../../../core/components/formatters/date_formatter.dart';
 import '../../../../core/components/search_input/search_input.dart';
 import '../../../../core/constants/app_colors.dart';
+import '../controllers/add_credit_controller.dart';
 import '../widgets/credit_card.dart';
 
 class AddCreditCard extends StatefulWidget {
@@ -30,11 +32,24 @@ class _AddCreditCardState extends State<AddCreditCard>
   late final AnimationController _flipController;
   bool _isFlipped = false;
 
-  ButtonStateEnum _statusButton = ButtonStateEnum.disabled;
+  late AddCreditController addCreditController;
 
   @override
   void initState() {
     super.initState();
+
+    addCreditController = Provider.of<AddCreditController>(
+      context,
+      listen: false,
+    );
+
+    addCreditController.statusButton.addListener(() {
+      if (addCreditController.statusButton.value == ButtonStateEnum.success) {
+        Future.delayed(const Duration(milliseconds: 1000), () {
+          if (mounted) Navigator.pop(context);
+        });
+      }
+    });
 
     _flipController = AnimationController(
       duration: const Duration(milliseconds: 600),
@@ -58,6 +73,8 @@ class _AddCreditCardState extends State<AddCreditCard>
   @override
   void dispose() {
     _flipController.dispose();
+    _cardNumberController.dispose();
+    addCreditController.statusButton.value = ButtonStateEnum.disabled;
     _expiryDateFocusNode.dispose();
     _cvvFocusNode.dispose();
     _isExpiryFocused.dispose();
@@ -83,9 +100,9 @@ class _AddCreditCardState extends State<AddCreditCard>
     if (_cardNumberController.text.length == 19 &&
         _expiryDateController.text.length == 5 &&
         _cvvController.text.length == 3) {
-      _statusButton = ButtonStateEnum.enabled;
+      addCreditController.statusButton.value = ButtonStateEnum.enabled;
     } else {
-      _statusButton = ButtonStateEnum.disabled;
+      addCreditController.statusButton.value = ButtonStateEnum.disabled;
     }
   }
 
@@ -194,12 +211,22 @@ class _AddCreditCardState extends State<AddCreditCard>
               const SizedBox(height: 16),
 
               // Botão de adicionar cartão
-              ButtonWidget(
-                onPressed: () {},
-                textButton: 'Adicionar cartão',
-                buttonState: _statusButton,
-                backgroundColor: AppColors.primary,
-              ),
+              ValueListenableBuilder(
+                  valueListenable: addCreditController.statusButton,
+                  builder: (_, value, __) {
+                    return ButtonWidget(
+                      onPressed: () {
+                        addCreditController.createPaymentMethod(
+                          _cardNumberController.text,
+                          _expiryDateController.text,
+                          _cvvController.text,
+                        );
+                      },
+                      textButton: 'Adicionar cartão',
+                      buttonState: value,
+                      backgroundColor: AppColors.primary,
+                    );
+                  }),
 
               const SizedBox(height: 48),
             ],

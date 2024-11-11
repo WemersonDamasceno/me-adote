@@ -1,5 +1,6 @@
-import '../../../login/data/models/user_model.dart';
-import '../../../login/domain/repositories/auth_repository.dart';
+import 'package:flutter_login/login/data/models/user_model.dart';
+import 'package:flutter_login/login/domain/repositories/auth_repository.dart';
+
 import '../../domain/repositories/splash_repository.dart';
 
 class SplashController {

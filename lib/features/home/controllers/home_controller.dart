@@ -1,4 +1,4 @@
-import '../../login/domain/repositories/auth_repository.dart';
+import 'package:flutter_login/login/domain/repositories/auth_repository.dart';
 
 class HomeController {
   final AuthRepository _authRepository;

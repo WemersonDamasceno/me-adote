@@ -1,4 +1,4 @@
-import '../../../features/login/data/models/user_model.dart';
+import 'package:flutter_login/login/data/models/user_model.dart';
 
 class UserSession {
   UserModel? user;

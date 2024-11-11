@@ -1,11 +1,14 @@
+import 'package:flutter_login/login/data/datasource/login_datasource.dart';
+import 'package:flutter_login/login/data/repositories/auth_repository_impl.dart';
+import 'package:flutter_login/login/domain/repositories/auth_repository.dart';
+import 'package:flutter_login/login/presentation/controllers/login_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 import '../../features/home/controllers/home_controller.dart';
-import '../../features/login/data/datasource/login_datasource.dart';
-import '../../features/login/data/repositories/auth_repository_impl.dart';
-import '../../features/login/domain/repositories/auth_repository.dart';
-import '../../features/login/presentation/controllers/login_controller.dart';
+import '../../features/payment_method/data/datasource/payment_datasource.dart';
+import '../../features/payment_method/data/repositories/payment_repository.dart';
+import '../../features/payment_method/presentation/controllers/add_credit_controller.dart';
 import '../../features/splash/data/datasources/splash_datasource.dart';
 import '../../features/splash/data/repositories/splash_repository_impl.dart';
 import '../../features/splash/domain/repositories/splash_repository.dart';
@@ -72,6 +75,23 @@ class DIHelper {
       create: (_) => HomeController(
         _.read<AuthRepository>(),
       ),
-    )
+    ),
+
+    //***** Payment ******** //
+    Provider<PaymentDatasource>(
+      create: (_) => PaymentDatasourceImpl(),
+    ),
+
+    Provider<PaymentRepository>(
+      create: (_) => PaymentRepositoryImpl(
+        _.read<PaymentDatasource>(),
+      ),
+    ),
+
+    Provider<AddCreditController>(
+      create: (_) => AddCreditController(
+        _.read<PaymentRepository>(),
+      ),
+    ),
   ];
 }

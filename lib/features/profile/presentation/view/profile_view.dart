@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login/login/presentation/views/login_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/components/snackbar/snackbar_mixin.dart';
 import '../../../../core/utils/extensions/name_extension.dart';
 import '../../../../core/utils/session/user_session.dart';
 import '../../../home/controllers/home_controller.dart';
-import '../../../login/presentation/views/login_page.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
