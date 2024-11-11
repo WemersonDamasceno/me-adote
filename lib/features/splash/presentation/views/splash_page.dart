@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login/login/presentation/views/login_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/components/button/button_controller.dart';
 import '../../../../core/components/button/button_widget.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/utils/session/user_session.dart';
+import '../../../navigation/nav_home_page.dart';
 import '../controllers/splash_controller.dart';
 
 class SplashPage extends StatefulWidget {
@@ -81,9 +83,14 @@ class _SplashPageState extends State<SplashPage> {
 
                         Future.delayed(const Duration(seconds: 1))
                             .whenComplete(() {
-                          Navigator.popAndPushNamed(
+                          Navigator.pushAndRemoveUntil(
                             context,
-                            token != null ? '/home_page' : '/login_page',
+                            MaterialPageRoute(
+                              builder: (context) => token != null
+                                  ? const NavHomePage()
+                                  : const LoginPage(),
+                            ),
+                            (route) => false,
                           );
                         });
                       });

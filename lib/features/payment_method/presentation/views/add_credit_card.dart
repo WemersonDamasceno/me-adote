@@ -34,6 +34,8 @@ class _AddCreditCardState extends State<AddCreditCard>
 
   late AddCreditController addCreditController;
 
+  String cardFlag = 'no_flag';
+
   @override
   void initState() {
     super.initState();
@@ -42,6 +44,12 @@ class _AddCreditCardState extends State<AddCreditCard>
       context,
       listen: false,
     );
+
+    _cardNumberController.addListener(() {
+      setState(() {
+        cardFlag = addCreditController.getCardBrand(_cardNumberController.text);
+      });
+    });
 
     addCreditController.statusButton.addListener(() {
       if (addCreditController.statusButton.value == ButtonStateEnum.success) {
@@ -141,6 +149,7 @@ class _AddCreditCardState extends State<AddCreditCard>
                 child: GestureDetector(
                   onTap: _handleFocusChange,
                   child: CreditCard(
+                    flagImage: cardFlag,
                     cardNumber: _cardNumberController.text,
                     dateNumber: _expiryDateController.text,
                     cvv: _cvvController.text,

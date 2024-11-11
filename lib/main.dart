@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_login/login/presentation/views/login_page.dart';
 import 'package:provider/provider.dart';
 
+import 'core/constants/app_colors.dart';
 import 'core/di/di.dart';
 import 'features/navigation/nav_home_page.dart';
 import 'features/splash/presentation/views/splash_page.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Poppins',
         primarySwatch: Colors.yellow,
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: const Color(0xFFFFB228),
+          primary: AppColors.primary,
           secondary: const Color(0xFF1D1D1D),
         ),
       ),

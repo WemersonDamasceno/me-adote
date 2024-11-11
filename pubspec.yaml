@@ -25,6 +25,7 @@ dependencies:
     git:
       url: git@github.com:WemersonDamasceno/flutter_login.git
       ref: main
+  flutter_swiper_view: ^1.1.8
 
 
 dev_dependencies:
@@ -41,6 +42,7 @@ flutter:
     - assets/images/icons/
     - assets/images/coupons/
     - assets/fonts/
+    - assets/images/flags_cards/
 
   fonts:
     - family: Poppins

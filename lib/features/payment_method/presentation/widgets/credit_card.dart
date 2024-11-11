@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class CreditCard extends StatelessWidget {
   final String cardNumber;
   final String dateNumber;
+  final String flagImage;
   final String cvv;
   final Animation<double> flipAnimation;
 
@@ -12,6 +13,7 @@ class CreditCard extends StatelessWidget {
     required this.dateNumber,
     required this.cvv,
     this.flipAnimation = const AlwaysStoppedAnimation(0.0),
+    required this.flagImage,
   });
 
   @override
@@ -65,7 +67,7 @@ class CreditCard extends StatelessWidget {
         Align(
           alignment: Alignment.topRight,
           child: Image.asset(
-            'assets/images/mastercard.jpg',
+            'assets/images/flags_cards/$flagImage.png',
             width: 50,
             height: 50,
           ),
