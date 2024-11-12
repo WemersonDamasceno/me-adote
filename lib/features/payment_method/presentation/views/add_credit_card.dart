@@ -7,6 +7,7 @@ import '../../../../core/components/formatters/credit_card_formatter.dart';
 import '../../../../core/components/formatters/date_formatter.dart';
 import '../../../../core/components/search_input/search_input.dart';
 import '../../../../core/constants/app_colors.dart';
+import '../../data/models/credit_card_model.dart';
 import '../controllers/add_credit_controller.dart';
 import '../widgets/credit_card.dart';
 
@@ -47,7 +48,7 @@ class _AddCreditCardState extends State<AddCreditCard>
 
     _cardNumberController.addListener(() {
       setState(() {
-        cardFlag = addCreditController.getCardBrand(_cardNumberController.text);
+        cardFlag = CreditCardModel.getCardBrand(_cardNumberController.text);
       });
     });
 

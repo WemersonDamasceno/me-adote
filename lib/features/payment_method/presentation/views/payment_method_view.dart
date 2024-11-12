@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../controllers/add_credit_controller.dart';
-import '../widgets/credit_card.dart';
 import '../widgets/item_list_tile.dart';
+import '../widgets/list_card.dart';
 import 'add_credit_card.dart';
 
 class PaymentMethodView extends StatefulWidget {
@@ -76,37 +75,8 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
             child: ValueListenableBuilder(
               valueListenable: addCreditController.creditCards,
               builder: (_, creditCards, __) {
-                return Swiper(
-                  itemWidth: 400,
-                  layout: SwiperLayout.CUSTOM,
-                  customLayoutOption:
-                      CustomLayoutOption(startIndex: -1, stateCount: 3)
-                        ..addRotate([-45.0 / 180, 0.0, 45.0 / 180])
-                        ..addTranslate([
-                          const Offset(-370.0, -40.0),
-                          const Offset(0.0, 0.0),
-                          const Offset(370.0, -40.0)
-                        ]),
-                  itemHeight: 250,
-                  loop: true,
-                  duration: 500,
-                  itemCount: creditCards.length,
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) {
-                    final card = creditCards[index];
-
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: CreditCard(
-                        cardNumber: card.cardNumber,
-                        cvv: card.cvv,
-                        dateNumber: card.expiryDate,
-                        flagImage: addCreditController.getCardBrand(
-                          card.cardNumber,
-                        ),
-                      ),
-                    );
-                  },
+                return RotatingCardSwiper(
+                  creditCards: creditCards,
                 );
               },
             ),
