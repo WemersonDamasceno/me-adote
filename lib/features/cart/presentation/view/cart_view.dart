@@ -116,13 +116,16 @@ class _CartViewState extends State<CartView> {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 60),
+                        const Spacer(),
                         ButtonWidget(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                           textButton: 'Continuar comprando',
                           buttonState: ButtonStateEnum.enabled,
                           backgroundColor: AppColors.primary,
                         ),
+                        const SizedBox(height: 48),
                       ],
                     ),
                   );

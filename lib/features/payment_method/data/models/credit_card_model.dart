@@ -1,16 +1,16 @@
-class CreditCardModel {
+class CreditCardEntity {
   final String cardNumber;
   final String expiryDate;
   final String cvv;
 
-  CreditCardModel({
+  CreditCardEntity({
     required this.cardNumber,
     required this.expiryDate,
     required this.cvv,
   });
 
-  factory CreditCardModel.fromJson(Map<String, dynamic> json) {
-    return CreditCardModel(
+  factory CreditCardEntity.fromJson(Map<String, dynamic> json) {
+    return CreditCardEntity(
       cardNumber: json['cardNumber'],
       expiryDate: json['expiryDate'],
       cvv: json['cvv'],

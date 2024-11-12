@@ -5,7 +5,7 @@ import '../../data/models/credit_card_model.dart';
 import 'credit_card.dart';
 
 class RotatingCardSwiper extends StatelessWidget {
-  final List<CreditCardModel> creditCards;
+  final List<CreditCardEntity> creditCards;
 
   const RotatingCardSwiper({super.key, required this.creditCards});
 
@@ -31,7 +31,7 @@ class RotatingCardSwiper extends StatelessWidget {
                 cardNumber: card.cardNumber,
                 cvv: card.cvv,
                 dateNumber: card.expiryDate,
-                flagImage: CreditCardModel.getCardBrand(card.cardNumber),
+                flagImage: CreditCardEntity.getCardBrand(card.cardNumber),
               ),
             );
           },

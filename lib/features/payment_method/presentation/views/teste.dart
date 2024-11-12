@@ -48,6 +48,8 @@ class _StackedPhotosExampleState extends State<StackedPhotosExample>
     super.dispose();
   }
 
+  ValueNotifier<double> firstPhotoPosition = ValueNotifier(20);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,64 +59,62 @@ class _StackedPhotosExampleState extends State<StackedPhotosExample>
         foregroundColor: Colors.white,
         title: const Text('Fotos Empilhadas'),
       ),
-      body: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * .6,
-              width: MediaQuery.of(context).size.width,
-              child: Stack(
-                alignment: Alignment.bottomCenter,
-                children: photos.asMap().entries.toList().reversed.map((entry) {
-                  int index = entry.key;
-                  String photo = entry.value;
+      body: Container(
+        color: Colors.red,
+        alignment: Alignment.center,
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: photos.asMap().entries.toList().reversed.map((entry) {
+            int index = entry.key;
+            String photo = entry.value;
 
-                  if (!_animationControllers.containsKey(index)) {
-                    _animationControllers[index] = AnimationController(
-                      vsync: this,
-                      duration: const Duration(seconds: 1),
-                    );
-                  }
+            if (!_animationControllers.containsKey(index)) {
+              _animationControllers[index] = AnimationController(
+                vsync: this,
+                duration: const Duration(seconds: 1),
+              );
+            }
 
-                  // Se for o item arrastado, queremos deixá-lo na posição onde foi solto
-                  if (index == 0) {
+            // Se for o item arrastado, queremos deixá-lo na posição onde foi solto
+            if (index == 0) {
+              firstPhotoPosition.value = 20.0 * (photos.length - 1 - index);
+              return ValueListenableBuilder(
+                  valueListenable: firstPhotoPosition,
+                  builder: (_, value, __) {
                     return Positioned(
-                      top: 20.0 * (photos.length - 1 - index),
+                      top: value,
                       child: Draggable(
                         axis: Axis.vertical,
                         feedback: buildCard(photo, context, .9, index),
                         childWhenDragging: const SizedBox.shrink(),
                         onDragUpdate: (details) {
                           log(details.delta.dy.toString());
-                          // Aqui você pode controlar o movimento do item enquanto é arrastado, se necessário
                         },
                         onDragEnd: (details) {
-                          // Inicia a animação de rotação quando o item é solto
-                          _animationControllers[index]
-                              ?.forward(from: 0.0)
-                              .then((_) {
-                            movePhotoToEnd(index);
-                          });
+                          if (details.offset.dy > 0) {
+                            firstPhotoPosition.value = details.offset.dy;
+
+                            // _animationControllers[index]
+                            //     ?.forward(from: 0.0)
+                            //     .then((_) {
+                            //   movePhotoToEnd(index);
+                            // });
+                          }
                         },
                         child: buildCard(photo, context, .9, index),
                       ),
                     );
-                  } else {
-                    return Positioned(
-                      top: 20.0 * (photos.length - 1 - index),
-                      child: GestureDetector(
-                        onTap: () => movePhotoToEnd(index),
-                        child: buildCard(photo, context, .87, index),
-                      ),
-                    );
-                  }
-                }).toList(),
-              ),
-            ),
-          ],
+                  });
+            } else {
+              return Positioned(
+                top: 20.0 * (photos.length - 1 - index),
+                child: GestureDetector(
+                  onTap: () => movePhotoToEnd(index),
+                  child: buildCard(photo, context, .87, index),
+                ),
+              );
+            }
+          }).toList(),
         ),
       ),
     );

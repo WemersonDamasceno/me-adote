@@ -2,8 +2,8 @@ import '../datasource/payment_datasource.dart';
 import '../models/credit_card_model.dart';
 
 abstract class PaymentRepository {
-  Future<List<CreditCardModel>> getCards();
-  Future<bool> createPaymentMethod(CreditCardModel card);
+  Future<List<CreditCardEntity>> getCards();
+  Future<bool> createPaymentMethod(CreditCardEntity card);
 }
 
 class PaymentRepositoryImpl implements PaymentRepository {
@@ -12,12 +12,12 @@ class PaymentRepositoryImpl implements PaymentRepository {
   PaymentRepositoryImpl(this.paymentDatasource);
 
   @override
-  Future<List<CreditCardModel>> getCards() async {
+  Future<List<CreditCardEntity>> getCards() async {
     return paymentDatasource.getCards();
   }
 
   @override
-  Future<bool> createPaymentMethod(CreditCardModel card) {
+  Future<bool> createPaymentMethod(CreditCardEntity card) {
     return paymentDatasource.createPaymentMethod(card);
   }
 }

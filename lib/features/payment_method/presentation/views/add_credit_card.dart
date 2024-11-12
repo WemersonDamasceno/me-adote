@@ -48,7 +48,7 @@ class _AddCreditCardState extends State<AddCreditCard>
 
     _cardNumberController.addListener(() {
       setState(() {
-        cardFlag = CreditCardModel.getCardBrand(_cardNumberController.text);
+        cardFlag = CreditCardEntity.getCardBrand(_cardNumberController.text);
       });
     });
 

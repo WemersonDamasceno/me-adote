@@ -10,7 +10,7 @@ class AddCreditController {
   AddCreditController(this.paymentRepository);
 
   final statusButton = ValueNotifier(ButtonStateEnum.disabled);
-  final ValueNotifier<List<CreditCardModel>> creditCards = ValueNotifier([]);
+  final ValueNotifier<List<CreditCardEntity>> creditCards = ValueNotifier([]);
 
   Future<void> createPaymentMethod(
     String cardNumber,
@@ -19,7 +19,7 @@ class AddCreditController {
   ) async {
     try {
       statusButton.value = ButtonStateEnum.loading;
-      final card = CreditCardModel(
+      final card = CreditCardEntity(
         cardNumber: cardNumber,
         expiryDate: expiryDate,
         cvv: cvv,
@@ -36,7 +36,7 @@ class AddCreditController {
     }
   }
 
-  Future<List<CreditCardModel>> fetchCards() async {
+  Future<List<CreditCardEntity>> fetchCards() async {
     try {
       final cardList = await paymentRepository.getCards();
       creditCards.value = cardList;
