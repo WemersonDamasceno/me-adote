@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';
@@ -104,6 +106,8 @@ class _StackedPhotosExampleState extends State<StackedPhotosExample>
                         curve: Curves.easeInOut,
                       ),
                     );
+
+                    //TODO:Falta logica para deixar a foto atras do ultimo item
                   }
 
                   if (index == 0) {
@@ -119,18 +123,17 @@ class _StackedPhotosExampleState extends State<StackedPhotosExample>
                             feedback: buildCard(photo, context, .9, index),
                             childWhenDragging: const SizedBox.shrink(),
                             onDragEnd: (details) {
-                              if (details.offset.dy < 0) {
-                                // Jogar para cima (com velocidade inicial negativa)
-                                firstPhotoPosition.value = -300;
+                              log(details.offset.dy.toString());
+                              // Jogar para cima (com velocidade inicial negativa)
+                              firstPhotoPosition.value = -300;
 
-                                // Iniciar animação de deslizar para cima
-                                _animationControllers[index]!
-                                    .forward(from: 0)
-                                    .then((_) {
-                                  // Após o deslizar, move a foto
-                                  movePhotoToEnd(index);
-                                });
-                              }
+                              // Iniciar animação de deslizar para cima
+                              _animationControllers[index]!
+                                  .forward(from: 0)
+                                  .then((_) {
+                                // Após o deslizar, move a foto
+                                movePhotoToEnd(index);
+                              });
                             },
                             child: buildAnimatedCard(photo, context, .9, index),
                           ),
@@ -178,7 +181,11 @@ class _StackedPhotosExampleState extends State<StackedPhotosExample>
 
   // Função para criar o card simples
   Widget buildCard(
-      String photo, BuildContext context, double width, int index) {
+    String photo,
+    BuildContext context,
+    double width,
+    int index,
+  ) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
